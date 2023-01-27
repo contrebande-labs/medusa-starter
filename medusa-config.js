@@ -43,25 +43,40 @@ const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET || "";
 const plugins = [
   `medusa-fulfillment-manual`,
   `medusa-payment-manual`,
-  // Uncomment to add Stripe support.
-  // You can create a Stripe account via: https://stripe.com
-  // {
-  //   resolve: `medusa-payment-stripe`,
-  //   options: {
-  //     api_key: STRIPE_API_KEY,
-  //     webhook_secret: STRIPE_WEBHOOK_SECRET,
-  //   },
-  // },
+    {
+     resolve: `medusa-payment-stripe`,
+     options: {
+       api_key: STRIPE_API_KEY,
+       webhook_secret: STRIPE_WEBHOOK_SECRET,
+     },
+     {
+       resolve: `medusa-plugin-sendgrid`,
+       options: {
+         api_key: process.env.SENDGRID_API_KEY,
+         from: process.env.SENDGRID_FROM,
+         order_placed_template: process.env.SENDGRID_ORDER_PLACED_ID_en_US,
+         localization: {
+           "fr-CA": { // locale key
+             order_placed_template: process.env.SENDGRID_ORDER_PLACED_ID_LOCALIZED_fr_CA,
+           },
+           "en-CA": { // locale key
+             order_placed_template: process.env.SENDGRID_ORDER_PLACED_ID_LOCALIZED_en_CA,
+           },
+           "fr-FR": { // locale key
+             order_placed_template: process.env.SENDGRID_ORDER_PLACED_ID_LOCALIZED_fr_FR,
+           },
+         },
+       },
+     },
+  },
 ];
 
 module.exports = {
   projectConfig: {
-    // redis_url: REDIS_URL,
-    // For more production-like environment install PostgresQL
-    // database_url: DATABASE_URL,
-    // database_type: "postgres",
+    redis_url: REDIS_URL,
+    database_url: DATABASE_URL,
+    database_type: "postgres",
     database_database: "./medusa-db.sql",
-    database_type: "sqlite",
     store_cors: STORE_CORS,
     admin_cors: ADMIN_CORS,
   },
