@@ -43,32 +43,44 @@ const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET || "";
 const plugins = [
   `medusa-fulfillment-manual`,
   `medusa-payment-manual`,
-    {
-     resolve: `medusa-payment-stripe`,
-     options: {
-       api_key: STRIPE_API_KEY,
-       webhook_secret: STRIPE_WEBHOOK_SECRET,
-     },
-     {
-       resolve: `medusa-plugin-sendgrid`,
-       options: {
-         api_key: process.env.SENDGRID_API_KEY,
-         from: process.env.SENDGRID_FROM,
-         order_placed_template: process.env.SENDGRID_ORDER_PLACED_ID_en_US,
-         localization: {
-           "fr-CA": { // locale key
-             order_placed_template: process.env.SENDGRID_ORDER_PLACED_ID_LOCALIZED_fr_CA,
-           },
-           "en-CA": { // locale key
-             order_placed_template: process.env.SENDGRID_ORDER_PLACED_ID_LOCALIZED_en_CA,
-           },
-           "fr-FR": { // locale key
-             order_placed_template: process.env.SENDGRID_ORDER_PLACED_ID_LOCALIZED_fr_FR,
-           },
-         },
-       },
-     },
+  {
+    resolve: `medusa-payment-stripe`,
+    options: {
+      api_key: STRIPE_API_KEY,
+      webhook_secret: STRIPE_WEBHOOK_SECRET,
+    },
   },
+  {
+    resolve: `medusa-file-s3`,
+    options: {
+        s3_url: process.env.S3_URL,
+        bucket: process.env.S3_BUCKET,
+        aws_config_object: {
+          region: process.env.S3_REGION,
+          access_key_id: process.env.S3_ACCESS_KEY_ID,
+          secret_access_key: process.env.S3_SECRET_ACCESS_KEY,
+        },
+    },
+  },
+  {
+    resolve: `medusa-plugin-sendgrid`,
+    options: {
+      api_key: process.env.SENDGRID_API_KEY,
+      from: process.env.SENDGRID_FROM,
+      order_placed_template: process.env.SENDGRID_ORDER_PLACED_ID_en_US,
+      localization: {
+        "fr-CA": { // locale key
+          order_placed_template: process.env.SENDGRID_ORDER_PLACED_ID_LOCALIZED_fr_CA,
+        },
+        "en-CA": { // locale key
+          order_placed_template: process.env.SENDGRID_ORDER_PLACED_ID_LOCALIZED_en_CA,
+        },
+        "fr-FR": { // locale key
+          order_placed_template: process.env.SENDGRID_ORDER_PLACED_ID_LOCALIZED_fr_FR,
+        },
+      },
+    },
+  }
 ];
 
 module.exports = {
