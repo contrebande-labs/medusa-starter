@@ -91,6 +91,8 @@ module.exports = {
     database_database: "./medusa-db.sql",
     store_cors: STORE_CORS,
     admin_cors: ADMIN_CORS,
+    cookie_secret: process.env.COOKIE_SECRET,
+    jwt_secret: process.env.JWT_SECRET,
   },
   plugins,
 };
