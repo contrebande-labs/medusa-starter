@@ -51,13 +51,14 @@ const plugins = [
     },
   },
   {
-    resolve: "medusa-file-r2",
+    resolve: "medusa-file-s3",
     options: {
-      public_url: process.env.R2_PUBLIC_URL,
+      s3_url: process.env.R2_PUBLIC_URL,
       bucket: process.env.R2_BUCKET_NAME,
-      account_id: process.env.CF_ACCOUNT_ID,
-      access_key: process.env.R2_ACCESS_KEY,
-      secret_key: process.env.R2_SECRET_KEY,
+      region: "auto",
+      access_key_id: process.env.R2_ACCESS_KEY,
+      secret_access_key: process.env.R2_SECRET_KEY,
+      endpoint: process.env.R2_S3_ENDPOINT,
     },
   },
   {
