@@ -61,23 +61,27 @@ const plugins = [
     },
   },
   {
-    resolve: `medusa-plugin-sendgrid`,
+    resolve: "medusa-plugin-ses",
     options: {
-      api_key: process.env.SENDGRID_API_KEY,
-      from: process.env.SENDGRID_FROM,
-      order_placed_template: process.env.SENDGRID_ORDER_PLACED_ID_en_US,
-      localization: {
-        "fr-CA": { // locale key
-          order_placed_template: process.env.SENDGRID_ORDER_PLACED_ID_LOCALIZED_fr_CA,
-        },
-        "en-CA": { // locale key
-          order_placed_template: process.env.SENDGRID_ORDER_PLACED_ID_LOCALIZED_en_CA,
-        },
-        "fr-FR": { // locale key
-          order_placed_template: process.env.SENDGRID_ORDER_PLACED_ID_LOCALIZED_fr_FR,
-        },
-      },
-    },
+      access_key_id: process.env.SES_ACCESS_KEY_ID,
+      secret_access_key: process.env.SES_SECRET_ACCESS_KEY,
+      region: process.env.SES_REGION,
+      from: process.env.EMAIL_FROM,
+      order_placed_template: "order_placed"
+      //order_return_requested_template: ""
+      //swap_shipment_created_template: ""
+      //claim_shipment_created_template: ""
+      //order_items_returned_template: ""
+      //swap_received_template: ""
+      //swap_created_template: ""
+      //gift_card_created_template: ""
+      //gift_card_created_template: ""
+      //order_shipped_template: ""
+      //order_canceled_template: ""
+      //user_password_reset_template: ""
+      //medusa_restock_template: ""
+      //order_refund_created_template: ""
+    }
   }
 ];
 
