@@ -12,7 +12,7 @@
   "dependencies": {
     "@medusajs/medusa": "1.7.5",
     "@medusajs/medusa-cli": "1.3.6",
-    "medusa-file-s3": "1.1.9",
+    "medusa-file-cloudflare-r2": "0.0.3",
     "medusa-fulfillment-manual": "1.1.34",
     "medusa-interfaces": "1.3.4",
     "medusa-payment-manual": "1.0.20",
