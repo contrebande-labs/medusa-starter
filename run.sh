@@ -6,8 +6,8 @@ npm install -g npm@latest
 
 if [ ! -f "/medusa" ]
 then
-  git clone https://github.com/contrebande-labs/medusa
-  cd medusa
+  git clone https://github.com/contrebande-labs/medusa-starter
+  cd medusa-starter
   npm i
   npx medusa telemetry --disable
   npx medusa seed -f ./data/seed.json
